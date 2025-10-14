@@ -1,3 +1,4 @@
+import colors from "@/src/core/theme/colors";
 import { Stack } from "expo-router";
 import LocalizationProvider from "../src/core/localization/LocalizationProvider";
 import PortfolioProvider from "../src/features/portfolio/application/providers/PortfolioProvider.jsx";
@@ -10,7 +11,7 @@ export default function RootLayout() {
           screenOptions={{
             headerShown: false,
             contentStyle: {
-              backgroundColor: "#F7F8FA",
+              backgroundColor: colors.backgroundPrimary,
             },
           }}
         >

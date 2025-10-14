@@ -9,9 +9,9 @@ import useLocalization from "../../../../core/localization/useLocalization";
 const PortfolioHeader = ({ portfolio }) => {
   const { t, toggleLocale, isRTL } = useLocalization();
   const isNegative = portfolio.pnlValue < 0;
-  const pnlColor = isNegative ? colors.backgroundCard : "rgba(255,255,255,0.18)";
-  const pnlTextColor = isNegative ? "#FFEEF1" : "#EBFAF3";
-  const pnlLabelColor = "rgba(255,255,255,0.75)";
+  const pnlColor = isNegative ? colors.backgroundCard : colors.pnlNegativeBg;
+  const pnlTextColor = isNegative ? colors.pnlNegativeText : colors.pnlPositiveText;
+  const pnlLabelColor = colors.whiteOverlay75;
 
   return (
     <LinearGradient
@@ -131,7 +131,7 @@ const styles = StyleSheet.create({
     width: 46,
     height: 46,
     borderRadius: 23,
-    backgroundColor: "rgba(255,255,255,0.28)",
+    backgroundColor: colors.whiteOverlay28,
     alignItems: "center",
     justifyContent: "center",
   },
@@ -145,14 +145,14 @@ const styles = StyleSheet.create({
     fontWeight: "600",
   },
   netValueLabel: {
-    color: "rgba(255,255,255,0.75)",
+    color: colors.whiteOverlay75,
     marginTop: 4,
     fontSize: 14,
   },
   languagePill: {
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: "rgba(255,255,255,0.24)",
+    backgroundColor: colors.whiteOverlay24,
     paddingHorizontal: spacing.md,
     paddingVertical: spacing.xs,
     borderRadius: 18,
@@ -170,7 +170,7 @@ const styles = StyleSheet.create({
     marginBottom: spacing.lg,
   },
   pnlCard: {
-    backgroundColor: "rgba(255,255,255,0.16)",
+    backgroundColor: colors.whiteOverlay16,
     borderRadius: 24,
     paddingVertical: spacing.md,
     paddingHorizontal: spacing.lg,
