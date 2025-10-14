@@ -1,50 +1,99 @@
-# Welcome to your Expo app 👋
+# React Portfolio
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A cross-platform portfolio tracking application built with React Native and Expo, featuring Clean Architecture principles, dependency injection, and internationalization support.
 
-## Get started
+## Features
 
-1. Install dependencies
+- Portfolio overview with holdings management
+- Real-time portfolio metrics and calculations
+- Portfolio simulation capabilities
+- Multi-language support (English, Arabic with RTL support)
+- Cross-platform (iOS, Android, Web)
+- Clean Architecture with dependency injection
+- Type-safe routing with Expo Router
+
+## Architecture
+
+This project follows Clean Architecture principles with clear separation of concerns:
+
+```
+src/
+├── core/                    # Shared utilities and infrastructure
+│   ├── localization/       # i18n support with RTL
+│   ├── theme/              # Design tokens (colors, spacing)
+│   └── utils/              # Common utilities
+└── features/
+    └── portfolio/          # Portfolio feature module
+        ├── application/    # Use cases and DI contexts
+        ├── data/          # Repositories and data mappers
+        ├── domain/        # Business logic and entities
+        └── presentation/  # UI components and screens
+```
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js (v16 or higher)
+- npm or yarn
+- Expo CLI
+
+### Installation
+
+1. Install dependencies:
 
    ```bash
    npm install
    ```
 
-2. Start the app
+2. Start the development server:
 
    ```bash
-   npx expo start
+   npm start
    ```
 
-In the output, you'll find options to open the app in a
+3. Run on your preferred platform:
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+   ```bash
+   npm run ios      # iOS simulator
+   npm run android  # Android emulator
+   npm run web      # Web browser
+   ```
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+### Available Scripts
 
-## Get a fresh project
+- `npm start` - Start the Expo development server
+- `npm run ios` - Run on iOS simulator
+- `npm run android` - Run on Android emulator
+- `npm run web` - Run in web browser
+- `npm run lint` - Run ESLint
 
-When you're ready, run:
+## Development
 
-```bash
-npm run reset-project
-```
+The app uses:
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+- **Expo Router** for file-based navigation
+- **React Native Reanimated** for smooth animations
+- **Context API** for state management and dependency injection
+- **Custom hooks** for business logic encapsulation
+- **Repository pattern** for data access abstraction
 
-## Learn more
+## Project Structure
 
-To learn more about developing your project with Expo, look at the following resources:
+- `/app` - Expo Router file-based routing
+- `/src/core` - Shared infrastructure code
+- `/src/features` - Feature modules with Clean Architecture
+- `/assets` - Images, fonts, and other static resources
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+## Technologies
 
-## Join the community
+- React Native 0.81
+- Expo SDK 54
+- React 19
+- TypeScript 5.9
+- Expo Router 6
+- React Native Reanimated 4
 
-Join our community of developers creating universal apps.
+## License
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+Private

@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "noter-app",
-    "slug": "noter-app",
+    "name": "react-portfolio",
+    "slug": "react-portfolio",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "noterapp",
+    "scheme": "reactportfolio",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
