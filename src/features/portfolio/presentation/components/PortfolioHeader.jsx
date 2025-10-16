@@ -1,15 +1,24 @@
-import { LinearGradient } from "expo-linear-gradient";
 import { Feather, Ionicons } from "@expo/vector-icons";
+import { LinearGradient } from "expo-linear-gradient";
+import PropTypes from "prop-types";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import useLocalization from "../../../../core/localization/useLocalization";
 import colors from "../../../../core/theme/colors";
 import spacing from "../../../../core/theme/spacing";
 import { formatCurrency } from "../../../../core/utils/formatters";
-import useLocalization from "../../../../core/localization/useLocalization";
 
+/**
+ * Portfolio header component displaying owner information, net value, P&L metrics, and language toggle.
+ * Features gradient background, avatar, and responsive RTL layout support.
+ *
+ * @component
+ * @param {Object} props
+ * @param {Object} props.portfolio - Portfolio data including owner name, net value, P&L, and currency
+ */
 const PortfolioHeader = ({ portfolio }) => {
   const { t, toggleLocale, isRTL } = useLocalization();
   const isNegative = portfolio.pnlValue < 0;
-  const pnlColor = isNegative ? colors.backgroundCard : colors.pnlNegativeBg;
+  const pnlColor = isNegative ? colors.backgroundCard : colors.backgroundCard;
   const pnlTextColor = isNegative ? colors.pnlNegativeText : colors.pnlPositiveText;
   const pnlLabelColor = colors.whiteOverlay75;
 
@@ -218,5 +227,15 @@ const styles = StyleSheet.create({
     textAlign: "right",
   },
 });
+
+PortfolioHeader.propTypes = {
+  portfolio: PropTypes.shape({
+    ownerName: PropTypes.string.isRequired,
+    netValue: PropTypes.number.isRequired,
+    pnlValue: PropTypes.number.isRequired,
+    pnlPercent: PropTypes.number.isRequired,
+    baseCurrency: PropTypes.string.isRequired,
+  }).isRequired,
+};
 
 export default PortfolioHeader;

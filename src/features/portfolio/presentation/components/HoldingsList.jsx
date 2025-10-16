@@ -1,10 +1,21 @@
+import PropTypes from "prop-types";
 import { StyleSheet, Text, View } from "react-native";
 import colors from "../../../../core/theme/colors";
 import spacing from "../../../../core/theme/spacing";
 import HoldingCard from "./HoldingCard";
 import useLocalization from "../../../../core/localization/useLocalization";
 
-const HoldingsList = ({ holdings, count }) => {
+/**
+ * Displays a list of holdings with a header showing the total count.
+ * Supports RTL layouts and delegates press events to individual holding cards.
+ *
+ * @component
+ * @param {Object} props
+ * @param {Array} props.holdings - Array of holding objects to display
+ * @param {number} props.count - Total count of holdings
+ * @param {Function} [props.onHoldingPress] - Optional callback when a holding is pressed
+ */
+const HoldingsList = ({ holdings, count, onHoldingPress }) => {
   const { t, isRTL } = useLocalization();
 
   return (
@@ -27,7 +38,7 @@ const HoldingsList = ({ holdings, count }) => {
               index !== holdings.length - 1 && styles.cardSpacing,
             ]}
           >
-            <HoldingCard holding={holding} />
+            <HoldingCard holding={holding} onPress={onHoldingPress} />
           </View>
         ))}
       </View>
@@ -81,5 +92,15 @@ const styles = StyleSheet.create({
     marginBottom: spacing.lg,
   },
 });
+
+HoldingsList.propTypes = {
+  holdings: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+    })
+  ).isRequired,
+  count: PropTypes.number.isRequired,
+  onHoldingPress: PropTypes.func,
+};
 
 export default HoldingsList;

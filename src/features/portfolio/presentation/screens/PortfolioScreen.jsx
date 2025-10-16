@@ -7,9 +7,26 @@ import PortfolioHeader from "../components/PortfolioHeader";
 import usePortfolioOverview from "../hooks/usePortfolioOverview";
 import useLocalization from "../../../../core/localization/useLocalization";
 
+/**
+ * Main portfolio screen displaying portfolio overview and holdings list.
+ * Handles loading, error, and success states with appropriate UI feedback.
+ * Supports RTL layouts and internationalization.
+ *
+ * @component
+ */
 const PortfolioScreen = () => {
   const { portfolio, metadata, status, error } = usePortfolioOverview();
   const { t, isRTL } = useLocalization();
+
+  const handleHoldingPress = (holding) => {
+    // TODO: Add your custom logic here, such as:
+    // - Navigate to a detail screen
+    // - Show a modal with more information
+    // - Perform any other action
+    if (__DEV__) {
+      console.log("Holding pressed:", holding);
+    }
+  };
 
   if (status === "loading") {
     return (
@@ -46,7 +63,11 @@ const PortfolioScreen = () => {
         showsVerticalScrollIndicator={false}
       >
         <PortfolioHeader portfolio={portfolio} />
-        <HoldingsList holdings={portfolio.holdings} count={metadata.holdingsCount} />
+        <HoldingsList
+          holdings={portfolio.holdings}
+          count={metadata.holdingsCount}
+          onHoldingPress={handleHoldingPress}
+        />
       </ScrollView>
     </SafeAreaView>
   );

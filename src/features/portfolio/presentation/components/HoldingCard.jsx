@@ -1,16 +1,34 @@
 import { Feather } from "@expo/vector-icons";
-import { StyleSheet, Text, View } from "react-native";
+import PropTypes from "prop-types";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 import colors from "../../../../core/theme/colors";
 import spacing from "../../../../core/theme/spacing";
 import { formatCurrency, formatNumber } from "../../../../core/utils/formatters";
 import useLocalization from "../../../../core/localization/useLocalization";
 
-const HoldingCard = ({ holding }) => {
+/**
+ * Displays a single holding card with performance metrics and trading information.
+ * Shows symbol, name, P&L, quantity, average price, last traded price, invested amount, and market value.
+ * Supports RTL layouts and press interactions.
+ *
+ * @component
+ * @param {Object} props
+ * @param {Object} props.holding - The holding data to display
+ * @param {Function} [props.onPress] - Optional callback when card is pressed
+ */
+const HoldingCard = ({ holding, onPress }) => {
   const { t, isRTL } = useLocalization();
   const isNegative = holding.pnlValue < 0;
 
   return (
-    <View style={[styles.card, isRTL && styles.cardRtl]}>
+    <Pressable
+      style={({ pressed }) => [
+        styles.card,
+        isRTL && styles.cardRtl,
+        pressed && styles.cardPressed
+      ]}
+      onPress={() => onPress?.(holding)}
+    >
       <View style={[styles.headerRow, isRTL && styles.rowReverse]}>
         <View style={styles.symbolBadge}>
           <Text style={styles.symbolText}>{holding.symbol}</Text>
@@ -106,7 +124,7 @@ const HoldingCard = ({ holding }) => {
           {formatCurrency(holding.marketValue, holding.currency)}
         </Text>
       </View>
-    </View>
+    </Pressable>
   );
 };
 
@@ -124,6 +142,10 @@ const styles = StyleSheet.create({
   },
   cardRtl: {
     writingDirection: "rtl",
+  },
+  cardPressed: {
+    opacity: 0.7,
+    transform: [{ scale: 0.98 }],
   },
   headerRow: {
     flexDirection: "row",
@@ -228,5 +250,23 @@ const styles = StyleSheet.create({
     textAlign: "right",
   },
 });
+
+HoldingCard.propTypes = {
+  holding: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    symbol: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    exchange: PropTypes.string.isRequired,
+    pnlValue: PropTypes.number.isRequired,
+    pnlPercent: PropTypes.number.isRequired,
+    quantity: PropTypes.number.isRequired,
+    averagePrice: PropTypes.number.isRequired,
+    lastTradedPrice: PropTypes.number.isRequired,
+    investedAmount: PropTypes.number.isRequired,
+    marketValue: PropTypes.number.isRequired,
+    currency: PropTypes.string.isRequired,
+  }).isRequired,
+  onPress: PropTypes.func,
+};
 
 export default HoldingCard;
